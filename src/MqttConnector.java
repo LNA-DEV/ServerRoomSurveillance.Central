@@ -6,6 +6,7 @@ public class MqttConnector implements MqttCallback {
     String clientId     = "SeverRoomCentral";
     MqttClient client;
 
+    //Constructor
     public MqttConnector() throws MqttException {
         client = new MqttClient(broker, clientId);
         MqttConnectOptions connOpts = new MqttConnectOptions();
