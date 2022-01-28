@@ -4,6 +4,5 @@ public class ServerRoomCentral {
 
     public static void main(String[] args) throws MqttException {
         MqttConnector connector = new MqttConnector();
-
     }
 }
