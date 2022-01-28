@@ -20,16 +20,16 @@ public class MqttConnector implements MqttCallback {
 
     @Override
     public void connectionLost(Throwable throwable) {
-
+        System.out.println("Connection lost");
     }
 
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-
+        System.out.println("Message arrived");
     }
 
     @Override
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-
+        System.out.println("delivery complete");
     }
 }
