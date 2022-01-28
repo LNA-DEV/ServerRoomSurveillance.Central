@@ -25,7 +25,7 @@ public class MqttConnector implements MqttCallback {
 
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-        System.out.println("Message arrived");
+        System.out.println("Message arrived: " + mqttMessage);
     }
 
     @Override
