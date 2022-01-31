@@ -17,7 +17,6 @@ public class MqttConnector implements MqttCallback {
         connOpts.setCleanSession(true);
         client.connect(connOpts);
         client.setCallback(this);
-        // subscribe to data messages
         client.subscribe("sensorclient/data");
         client.subscribe("sensorclient/alarm");
     }
