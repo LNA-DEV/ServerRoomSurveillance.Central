@@ -30,12 +30,10 @@ public class MqttConnector implements MqttCallback {
 
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-        if (!mqttMessage.toString().contains(":"))
-        {
+        if (!mqttMessage.toString().contains(":")) {
             System.out.println(GetDateTimeNow() + " ALARM IN ROOM: " + mqttMessage);
             java.awt.Toolkit.getDefaultToolkit().beep();java.awt.Toolkit.getDefaultToolkit().beep();
-        }else
-        {
+        } else {
             System.out.println(GetDateTimeNow() + ": Message arrived: " + mqttMessage);
         }
     }
