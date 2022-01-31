@@ -19,6 +19,7 @@ public class MqttConnector implements MqttCallback {
         client.setCallback(this);
         // subscribe to data messages
         client.subscribe("sensorclient/data");
+        client.subscribe("sensorclient/alarm");
     }
 
 
@@ -29,8 +30,13 @@ public class MqttConnector implements MqttCallback {
 
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-
-        System.out.println(GetDateTimeNow() + ": Message arrived: " + mqttMessage);
+        if (!mqttMessage.toString().contains(":"))
+        {
+            System.out.println(GetDateTimeNow() + " ALARM IN ROOM: " + mqttMessage);
+        }else
+        {
+            System.out.println(GetDateTimeNow() + ": Message arrived: " + mqttMessage);
+        }
     }
 
     @Override
