@@ -1,9 +1,6 @@
 import org.eclipse.paho.client.mqttv3.*;
-
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class MqttConnector implements MqttCallback {
 
