@@ -1,14 +1,14 @@
 import org.eclipse.paho.client.mqttv3.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-public class MqttConnector implements MqttCallback {
+public class MqttConnector implements MqttCallback, ISender {
 
     String broker       = "tcp://127.0.0.1:1883";
     String clientId     = "SeverRoomCentral";
     MqttClient client;
+    IReceiver receiver;
 
-    public MqttConnector() throws MqttException {
+    public MqttConnector(IReceiver receiver) throws MqttException {
+        this.receiver = receiver;
         client = new MqttClient(broker, clientId);
         MqttConnectOptions connOpts = new MqttConnectOptions();
         connOpts.setCleanSession(true);
@@ -25,13 +25,8 @@ public class MqttConnector implements MqttCallback {
     }
 
     @Override
-    public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-        if (!mqttMessage.toString().contains(":")) {
-            System.out.println(GetDateTimeNow() + " ALARM IN ROOM: " + mqttMessage);
-            java.awt.Toolkit.getDefaultToolkit().beep();java.awt.Toolkit.getDefaultToolkit().beep();
-        } else {
-            System.out.println(GetDateTimeNow() + ": Message arrived: " + mqttMessage);
-        }
+    public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+        receiver.Update(topic, mqttMessage.toString());
     }
 
     @Override
@@ -39,9 +34,8 @@ public class MqttConnector implements MqttCallback {
         System.out.println("delivery complete");
     }
 
-    private String GetDateTimeNow(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        return dtf.format(now);
+    @Override
+    public void Send(String topic, String message) throws Exception {
+
     }
 }
