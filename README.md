@@ -1,1 +1,3 @@
 # ServerRoomSurveillance.Central
+
+School project
