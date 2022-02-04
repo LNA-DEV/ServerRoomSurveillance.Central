@@ -42,6 +42,7 @@ public class ServerRoomCentral implements IReceiver {
             model.AddMessage(message);
             rdp.lblHumid.setText("Humidity: " + model.Humidity);
             rdp.lblTemp.setText("Temperature: " + model.Temperature);
+            rdp.lblRoom.setText("Room: " + model.Room);
         }
 
         if (topic.equals("sensorclient/alarm")){
