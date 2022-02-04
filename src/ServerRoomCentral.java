@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class ServerRoomCentral implements IReceiver {
 
@@ -6,7 +7,6 @@ public class ServerRoomCentral implements IReceiver {
     ISender connector;
 
     public static void main(String[] args) {
-        System.out.println("asdf");
         new ServerRoomCentral();
     }
 
@@ -40,13 +40,13 @@ public class ServerRoomCentral implements IReceiver {
         if (topic.equals("sensorclient/data")){
             SensorDataModel model = new SensorDataModel();
             model.AddMessage(message);
-            rdp.lblHumid.setText("Humidity: " + model.Humidity);
-            rdp.lblTemp.setText("Temperature: " + model.Temperature);
+            rdp.lblHumid.setText("Humidity: " + model.Humidity + "%");
+            rdp.lblTemp.setText("Temperature: " + model.Temperature + "°C");
             rdp.lblRoom.setText("Room: " + model.Room);
         }
 
         if (topic.equals("sensorclient/alarm")){
-
+            Toolkit.getDefaultToolkit().beep();
         }
     }
 
