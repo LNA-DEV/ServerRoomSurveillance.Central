@@ -1,5 +1,7 @@
 import org.eclipse.paho.client.mqttv3.*;
 
+import java.nio.charset.StandardCharsets;
+
 public class MqttConnector implements MqttCallback, ISender {
 
     String broker       = "tcp://127.0.0.1:1883";
@@ -36,6 +38,7 @@ public class MqttConnector implements MqttCallback, ISender {
 
     @Override
     public void Send(String topic, String message) throws Exception {
-
+        MqttMessage mqttMessage = new MqttMessage(message.getBytes(StandardCharsets.UTF_8));
+        client.publish(topic, mqttMessage);
     }
 }
