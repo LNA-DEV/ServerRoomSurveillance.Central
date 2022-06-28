@@ -33,12 +33,12 @@ public class ServerRoomCentral implements IReceiver {
         hf.setVisible(true);
     }
 
-    @Override
-    public void Update(int room, double temp, double humid, double tlimit, double hlimit) throws Exception {
+    private void updatePanels(int room, double temp, double humid, double tlimit, double hlimit)
+    {
         for(RoomDisplayPanel panel : rp) {   // if panel for the room exists -> update
             if (room == panel.room) {
                 try {
-                    panel.update(room, temp, humid, tlimit, hlimit);
+                    panel.updateDisplay(room, temp, humid, tlimit, hlimit);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -57,6 +57,24 @@ public class ServerRoomCentral implements IReceiver {
         hf.add(p);
         hf.repaint();
         rp.add(p);
+    }
+
+    @Override
+    public void update(String topic, String message) throws Exception {
+        if(topic.equals("sensorclient/data"))
+        {   String[] teil = message.split(":");
+            int room = Integer.parseInt(teil[0]);
+            double temp = Double.parseDouble(teil[1]);
+            double humid = Double.parseDouble(teil[2]);
+            double templ = Double.parseDouble(teil[3]);
+            double huml = Double.parseDouble(teil[4]);
+            updatePanels(room, temp, humid, templ, huml);
+        }
+        if(topic.equals("sensorclient/alarm"))
+        {
+            // Alarm
+            //rp.setBackground(Color.red);
+        }
     }
 
 

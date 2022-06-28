@@ -1,3 +1,4 @@
-public interface ISender {
-    public void Send(String topic, String message) throws  Exception;
+public interface ISender
+{
+    public void send(String topic, String message) throws Exception;
 }

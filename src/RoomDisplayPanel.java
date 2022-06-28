@@ -10,11 +10,11 @@ public class RoomDisplayPanel extends JPanel implements ActionListener
     JButton confirm, send;
     JTextField tftemp, tfhum;
     JLabel l, lt, lh;
-    Sender sender;
+    ISender sender;
     DecimalFormat df = new DecimalFormat("#0.00");
     DecimalFormat df1 = new DecimalFormat("#0.0");
 
-    public RoomDisplayPanel(Sender sender, int room)
+    public RoomDisplayPanel(ISender sender, int room)
     {
         super();
         this.sender = sender;
