@@ -9,7 +9,7 @@ public class ServerRoomCentral implements IReceiver {
 
     ISender connector;
     Vector<RoomDisplayPanel> rp = new Vector<RoomDisplayPanel>();
-
+    int panelx = 20 ,panely = 20;
     JFrame hf;
 
     public static void main(String[] args) {
@@ -60,7 +60,7 @@ public class ServerRoomCentral implements IReceiver {
     }
 
     @Override
-    public void update(String topic, String message) throws Exception {
+    public void Update(String topic, String message) throws Exception {
         if(topic.equals("sensorclient/data"))
         {   String[] teil = message.split(":");
             int room = Integer.parseInt(teil[0]);
